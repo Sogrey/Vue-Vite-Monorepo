@@ -5,6 +5,7 @@
 ## 📚 文档导航
 
 - **[快速开始指南](./docs/quick-start.md)** - 5 分钟快速上手
+- **[构建产物分发指南](./docs/build-distribution.md)** - 版本发布和产物分发 🆕
 - **[Vue + Vite 专属配置](./docs/vue-vite-config.md)** - 针对 Vue + Vite 的最佳实践配置 ⭐
 - **[项目结构说明](./docs/project-structure.md)** - 详细的目录结构和配置说明
 - **[Turborepo 完全指南](./docs/turborepo-guide.md)** - Turborepo 深度解析
