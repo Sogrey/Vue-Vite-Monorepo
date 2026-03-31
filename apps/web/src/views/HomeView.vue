@@ -243,6 +243,8 @@ Vue-Vite-Monorepo/
   display: inline-block;
   font-size: 3.5rem;
   animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+  margin-right: 0.5rem;
 }
 
 @keyframes float {
