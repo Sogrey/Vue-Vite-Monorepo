@@ -5,33 +5,33 @@ const features = ref([
   {
     icon: '🏗️',
     title: 'Monorepo 架构',
-    desc: '使用 Turborepo 管理多个包，共享依赖和配置，提高开发效率'
+    desc: '使用 Turborepo 管理多个包，共享依赖和配置，提高开发效率',
   },
   {
     icon: '📦',
     title: 'SDK 封装',
-    desc: '封装常用工具函数和 API 请求，提高代码复用性'
+    desc: '封装常用工具函数和 API 请求，提高代码复用性',
   },
   {
     icon: '⚡',
     title: '极速构建',
-    desc: 'Vite 提供毫秒级热更新，Turborepo 智能缓存加速构建'
+    desc: 'Vite 提供毫秒级热更新，Turborepo 智能缓存加速构建',
   },
   {
     icon: '🎯',
     title: '类型安全',
-    desc: 'TypeScript 全栈类型支持，减少运行时错误'
+    desc: 'TypeScript 全栈类型支持，减少运行时错误',
   },
   {
     icon: '🔧',
     title: '现代化配置',
-    desc: 'ESLint + Prettier 代码规范，Git Hooks 自动检查'
+    desc: 'ESLint + Prettier 代码规范，Git Hooks 自动检查',
   },
   {
     icon: '🚀',
     title: 'CI/CD 集成',
-    desc: 'GitHub Actions 自动化构建、测试和部署'
-  }
+    desc: 'GitHub Actions 自动化构建、测试和部署',
+  },
 ])
 
 const techStack = ref([
@@ -40,14 +40,14 @@ const techStack = ref([
   { name: 'TypeScript', icon: '📘', version: '5.x' },
   { name: 'Turborepo', icon: '🚀', version: '2.x' },
   { name: 'pnpm', icon: '📦', version: '10.x' },
-  { name: 'ESLint', icon: '✨', version: '9.x' }
+  { name: 'ESLint', icon: '✨', version: '9.x' },
 ])
 
 const stats = ref([
   { label: '构建缓存加速', value: '63x', icon: '⚡' },
   { label: 'SDK 包', value: '2个', icon: '📦' },
   { label: '包管理器', value: 'pnpm', icon: '🔗' },
-  { label: '代码质量', value: 'A+', icon: '✨' }
+  { label: '代码质量', value: 'A+', icon: '✨' },
 ])
 </script>
 
@@ -168,7 +168,7 @@ Vue-Vite-Monorepo/
           <div class="step-card">
             <div class="step-number">1</div>
             <h3>克隆项目</h3>
-            <code>git clone &lt;repo-url&gt;</code>
+            <code>git clone https://github.com/Sogrey/Vue-Vite-Monorepo.git</code>
           </div>
           <div class="step-card">
             <div class="step-number">2</div>
@@ -213,8 +213,9 @@ Vue-Vite-Monorepo/
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 50%, rgba(30, 144, 255, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 70% 50%, rgba(0, 191, 255, 0.15) 0%, transparent 50%);
+  background:
+    radial-gradient(circle at 30% 50%, rgba(30, 144, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(0, 191, 255, 0.15) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -230,7 +231,7 @@ Vue-Vite-Monorepo/
   font-size: 3.5rem;
   font-weight: 800;
   margin: 0 0 1.5rem 0;
-  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 50%, #87CEEB 100%);
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 50%, #87ceeb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -245,7 +246,8 @@ Vue-Vite-Monorepo/
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -284,19 +286,21 @@ Vue-Vite-Monorepo/
 }
 
 .action-button.primary {
-  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%);
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
   color: white;
   border: 1px solid rgba(30, 144, 255, 0.5);
 }
 
 .action-button.primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.4), 0 0 20px rgba(30, 144, 255, 0.3);
+  box-shadow:
+    0 8px 25px rgba(30, 144, 255, 0.4),
+    0 0 20px rgba(30, 144, 255, 0.3);
 }
 
 .action-button.secondary {
   background: rgba(30, 144, 255, 0.1);
-  color: #87CEEB;
+  color: #87ceeb;
   border: 2px solid rgba(30, 144, 255, 0.3);
 }
 
@@ -359,7 +363,9 @@ Vue-Vite-Monorepo/
 .stat-card:hover {
   transform: translateY(-5px);
   border-color: rgba(30, 144, 255, 0.5);
-  box-shadow: 0 8px 32px rgba(30, 144, 255, 0.3), 0 0 20px rgba(30, 144, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(30, 144, 255, 0.3),
+    0 0 20px rgba(30, 144, 255, 0.2);
 }
 
 .stat-icon {
@@ -370,7 +376,7 @@ Vue-Vite-Monorepo/
 .stat-value {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%);
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -406,7 +412,9 @@ Vue-Vite-Monorepo/
 .feature-card:hover {
   transform: translateY(-5px);
   border-color: rgba(30, 144, 255, 0.5);
-  box-shadow: 0 8px 32px rgba(30, 144, 255, 0.3), 0 0 20px rgba(30, 144, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(30, 144, 255, 0.3),
+    0 0 20px rgba(30, 144, 255, 0.2);
 }
 
 .feature-icon {
@@ -467,7 +475,7 @@ Vue-Vite-Monorepo/
 }
 
 .tech-version {
-  color: #1E90FF;
+  color: #1e90ff;
   font-size: 0.85rem;
 }
 
@@ -527,7 +535,7 @@ Vue-Vite-Monorepo/
 .step-number {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%);
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -548,7 +556,7 @@ Vue-Vite-Monorepo/
 
 .step-card code {
   background: rgba(30, 144, 255, 0.15);
-  color: #87CEEB;
+  color: #87ceeb;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-family: 'Courier New', monospace;
