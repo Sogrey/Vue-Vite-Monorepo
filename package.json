@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
+    "build:distribute": "node scripts/build-distribute.js",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "test": "turbo test",
-    "clean": "turbo clean",
+    "clean": "turbo clean && node -e \"const fs=require('fs'); if(fs.existsSync('build')) fs.rmSync('build', {recursive:true})\"",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {

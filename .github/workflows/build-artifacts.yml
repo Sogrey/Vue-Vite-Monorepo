@@ -1,0 +1,94 @@
+name: Build Artifacts for Distribution
+
+on:
+  # 仅在推送到 main 分支时触发
+  push:
+    branches: [ "main" ]
+  # 为 PR 创建预览构建
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-artifacts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10.6.5
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
+    # 构建所有包
+    - name: Build all packages
+      run: pnpm build
+
+    # 整理构建产物到 build 目录
+    - name: Organize build artifacts
+      run: |
+        echo "📦 整理构建产物..."
+        
+        # 创建 build 目录
+        mkdir -p build
+        
+        # 移动 sdk1 构建产物
+        if [ -d "packages/sdk1/dist" ]; then
+          echo "✅ 移动 sdk1 构建产物"
+          cp -r packages/sdk1/dist build/sdk1
+        fi
+        
+        # 移动 sdk2 构建产物
+        if [ -d "packages/sdk2/dist" ]; then
+          echo "✅ 移动 sdk2 构建产物"
+          cp -r packages/sdk2/dist build/sdk2
+        fi
+        
+        # 移动 web 构建产物
+        if [ -d "apps/web/dist" ]; then
+          echo "✅ 移动 web 构建产物"
+          cp -r apps/web/dist build/web
+        fi
+        
+        echo "📊 构建产物结构："
+        tree build -L 2 || ls -R build
+
+    # 上传构建产物
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: build/
+        retention-days: 30
+
+    # 创建构建摘要
+    - name: Create build summary
+      run: |
+        echo "## 📦 构建摘要" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "构建时间: $(date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 构建产物" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **sdk1**: \`build/sdk1/\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **sdk2**: \`build/sdk2/\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **web**: \`build/web/\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 文件大小" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        du -sh build/* >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY

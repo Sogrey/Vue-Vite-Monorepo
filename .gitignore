@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Build artifacts for distribution
+build
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -40,6 +43,5 @@ coverage
 .nyc_output
 
 # Build artifacts
-build
 .next
 out
