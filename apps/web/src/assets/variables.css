@@ -1,0 +1,37 @@
+:root {
+  /* 科幻蓝色主题 */
+  --color-primary: #1E90FF;
+  --color-primary-light: #00BFFF;
+  --color-primary-lighter: #87CEEB;
+  --color-primary-dark: #0066CC;
+  
+  /* 背景色 */
+  --bg-dark: #0a0e1a;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+  
+  /* 边框色 */
+  --border-color: rgba(30, 144, 255, 0.2);
+  --border-color-hover: rgba(30, 144, 255, 0.5);
+  
+  /* 文本色 */
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+  
+  /* 光晕效果 */
+  --glow-color: rgba(30, 144, 255, 0.3);
+  --glow-shadow: 0 0 20px rgba(30, 144, 255, 0.3);
+}
+
+/* 全局渐变背景类 */
+.gradient-bg {
+  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 50%, #87CEEB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
