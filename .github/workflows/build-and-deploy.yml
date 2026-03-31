@@ -1,4 +1,4 @@
-name: Build Artifacts for Distribution
+name: Build and Deploy
 
 on:
   # 仅在推送到 main 分支时触发
@@ -7,9 +7,17 @@ on:
   # 为 PR 创建预览构建
   pull_request:
     branches: [ "main" ]
+  # 手动触发
+  workflow_dispatch:
+
+# 允许一个并发的部署
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build-artifacts:
+  # 构建作业（统一执行）
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -33,31 +41,25 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
-    # 构建所有包
-    - name: Build all packages
+    - name: Build
       run: pnpm build
 
-    # 整理构建产物到 build 目录
+    # 整理构建产物到 build 目录（用于分发）
     - name: Organize build artifacts
       run: |
         echo "📦 整理构建产物..."
-        
-        # 创建 build 目录
         mkdir -p build
         
-        # 移动 sdk1 构建产物
         if [ -d "packages/sdk1/dist" ]; then
           echo "✅ 移动 sdk1 构建产物"
           cp -r packages/sdk1/dist build/sdk1
         fi
         
-        # 移动 sdk2 构建产物
         if [ -d "packages/sdk2/dist" ]; then
           echo "✅ 移动 sdk2 构建产物"
           cp -r packages/sdk2/dist build/sdk2
         fi
         
-        # 移动 web 构建产物
         if [ -d "apps/web/dist" ]; then
           echo "✅ 移动 web 构建产物"
           cp -r apps/web/dist build/web
@@ -66,7 +68,7 @@ jobs:
         echo "📊 构建产物结构："
         tree build -L 2 || ls -R build
 
-    # 上传构建产物
+    # 上传构建产物（用于分发和后续部署）
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -92,3 +94,46 @@ jobs:
         echo '```' >> $GITHUB_STEP_SUMMARY
         du -sh build/* >> $GITHUB_STEP_SUMMARY
         echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # 部署作业（仅在 main 分支执行，依赖构建）
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-artifacts
+        path: build/
+
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v4
+      continue-on-error: true
+
+    - name: Check Pages setup
+      run: |
+        if [ "${{ steps.pages.outcome }}" == "failure" ]; then
+          echo "❌ GitHub Pages 未正确配置"
+          echo "请在仓库设置中启用 GitHub Pages："
+          echo "1. 进入仓库 Settings"
+          echo "2. 找到 Pages section"
+          echo "3. Source 选择 'GitHub Actions'"
+          echo "4. 保存设置"
+          exit 1
+        else
+          echo "✅ GitHub Pages 配置成功"
+        fi
+
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: build/web
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4

@@ -6,8 +6,8 @@
  */
 
 import { execSync } from 'child_process';
-import { existsSync, mkdirSync, cpSync, rmSync } from 'fs';
-import { resolve } from 'path';
+import { existsSync, mkdirSync, cpSync, rmSync, readdirSync, statSync } from 'fs';
+import { resolve, join } from 'path';
 
 const rootDir = resolve(process.cwd());
 const buildDir = resolve(rootDir, 'build');
@@ -55,17 +55,28 @@ packages.forEach(pkg => {
 });
 
 console.log('\n📊 构建产物结构:');
+function printTree(dir, prefix = '', maxDepth = 2, currentDepth = 0) {
+  if (currentDepth >= maxDepth) return;
+  
+  const items = readdirSync(dir);
+  items.forEach((item, index) => {
+    const itemPath = join(dir, item);
+    const isLast = index === items.length - 1;
+    const connector = isLast ? '└── ' : '├── ';
+    console.log(prefix + connector + item);
+    
+    if (statSync(itemPath).isDirectory()) {
+      const newPrefix = prefix + (isLast ? '    ' : '│   ');
+      printTree(itemPath, newPrefix, maxDepth, currentDepth + 1);
+    }
+  });
+}
+
 try {
-  const treeOutput = execSync('tree build -L 2', { encoding: 'utf-8', cwd: rootDir });
-  console.log(treeOutput);
-} catch {
-  // Windows 系统可能没有 tree 命令，使用 dir 替代
-  try {
-    const dirOutput = execSync('dir build /s /b', { encoding: 'utf-8', cwd: rootDir });
-    console.log(dirOutput);
-  } catch {
-    console.log('  (无法显示目录结构)');
-  }
+  console.log('build/');
+  printTree(buildDir);
+} catch (e) {
+  console.log('  (无法显示目录结构)');
 }
 
 console.log('✨ 构建产物整理完成！');

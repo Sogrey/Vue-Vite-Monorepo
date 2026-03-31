@@ -107,13 +107,18 @@ pnpm clean
 
 ## 🔄 GitHub Actions 工作流
 
-### build-artifacts.yml
+### build-and-deploy.yml
+
+统一的工作流，包含构建、产物上传和部署。
 
 **触发条件：**
 - 推送到 `main` 分支
 - Pull Request 到 `main` 分支
+- 手动触发（workflow_dispatch）
 
-**执行步骤：**
+**Job 结构：**
+
+#### 1. build 作业（始终执行）
 ```yaml
 1. Checkout 代码
 2. 设置 Node.js 环境
@@ -121,7 +126,7 @@ pnpm clean
 4. 安装依赖
 5. 构建所有包
 6. 整理产物到 build 目录
-7. 上传构建产物
+7. 上传构建产物（Artifacts）
 8. 生成构建摘要
 ```
 
@@ -129,24 +134,17 @@ pnpm clean
 - Artifacts 保留 30 天
 - 可在 Actions 页面手动下载
 
-### deploy.yml
-
-**触发条件：**
-- 推送到 `main` 分支
-
-**执行步骤：**
+#### 2. deploy 作业（仅 main 分支执行）
 ```yaml
-1. Checkout 代码
-2. 设置 Node.js 环境
-3. 设置 pnpm 环境
-4. 安装依赖
-5. 构建所有包
-6. 部署 web 应用到 GitHub Pages
+1. 下载构建产物
+2. 配置 GitHub Pages
+3. 部署 web 应用到 GitHub Pages
 ```
 
 **说明：**
-- 仅部署 `apps/web/dist` 到 GitHub Pages
-- 不影响其他包的构建产物
+- 依赖 build 作业完成
+- 仅在 `main` 分支触发
+- 使用 build 作业的产物，避免重复构建
 
 ## 📦 版本发布流程
 
@@ -196,7 +194,7 @@ const packages = [
 
 ### 修改产物保留时间
 
-编辑 `.github/workflows/build-artifacts.yml`：
+编辑 `.github/workflows/build-and-deploy.yml`：
 
 ```yaml
 - name: Upload build artifacts
