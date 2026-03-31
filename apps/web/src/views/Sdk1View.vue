@@ -91,7 +91,7 @@ const features = [
     </div>
 
     <!-- 内容区域 -->
-    <div class="content-wrapper">
+    <div class="content-wrapper main-content">
       <!-- 功能列表 -->
       <section class="content-card">
         <div class="card-header">

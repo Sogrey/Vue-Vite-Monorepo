@@ -121,7 +121,7 @@ onMounted(() => {
     </div>
 
     <!-- 内容区域 -->
-    <div class="content-wrapper">
+    <div class="content-wrapper main-content">
       <!-- HTTP 方法 -->
       <section class="content-card">
         <div class="card-header">
