@@ -22,7 +22,7 @@ jobs:
       contents: read
       pages: write
       id-token: write
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -37,7 +37,7 @@ jobs:
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 9
+        version: 10.6.5
 
     - name: Get pnpm version
       run: |
@@ -74,7 +74,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./dist
+        path: ./apps/web/dist
 
     - name: Deploy to GitHub Pages
       uses: actions/deploy-pages@v4
