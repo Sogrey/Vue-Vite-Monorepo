@@ -92,12 +92,6 @@ html, body {
 </style>
 
 <style scoped>
-#app {
-  display: flex;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-  overflow-x: hidden; /* 防止横向滚动 */
-}
 
 /* 显示/隐藏控制 */
 .desktop-only {
@@ -112,21 +106,21 @@ html, body {
 .sidebar {
   width: 260px;
   min-width: 260px; /* 防止收缩 */
-  background: rgba(15, 12, 41, 0.95);
+  background: rgba(10, 14, 26, 0.85); /* 半透明背景 */
   backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(30, 144, 255, 0.2); /* 蓝色边框 */
   flex-direction: column;
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   z-index: 100;
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(30, 144, 255, 0.1); /* 添加蓝色光晕 */
 }
 
 .sidebar-header {
   padding: 2rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(30, 144, 255, 0.15);
 }
 
 .logo {
@@ -201,8 +195,8 @@ html, body {
 
 .nav-item.router-link-exact-active {
   color: #fff;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-  border-left: 3px solid #667eea;
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.2) 0%, rgba(0, 191, 255, 0.2) 100%);
+  border-left: 3px solid #1E90FF; /* 蓝色激活边框 */
 }
 
 .nav-icon {
@@ -218,7 +212,7 @@ html, body {
 
 .sidebar-footer {
   padding: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(30, 144, 255, 0.15);
 }
 
 .tech-badge {
@@ -228,12 +222,12 @@ html, body {
 }
 
 .tech-badge span {
-  background: rgba(102, 126, 234, 0.2);
-  color: #a0aec0;
+  background: rgba(30, 144, 255, 0.15);
+  color: #87CEEB; /* 天蓝色 */
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
   font-size: 0.75rem;
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  border: 1px solid rgba(30, 144, 255, 0.3);
 }
 
 /* ========== 桌面端：右侧内容区 ========== */
@@ -254,10 +248,10 @@ html, body {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(15, 12, 41, 0.95);
+  background: rgba(10, 14, 26, 0.85); /* 半透明背景 */
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(30, 144, 255, 0.2);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(30, 144, 255, 0.1);
 }
 
 .mobile-header-content {
@@ -291,8 +285,8 @@ html, body {
 }
 
 .mobile-nav-item.router-link-exact-active {
-  color: #667eea;
-  background: rgba(102, 126, 234, 0.15);
+  color: #1E90FF;
+  background: rgba(30, 144, 255, 0.15);
 }
 
 .mobile-nav-item .nav-icon {

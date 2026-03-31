@@ -6,3 +6,66 @@ body,
   padding: 0;
   margin: 0;
 }
+
+/* 科幻蓝图网格背景 */
+#app {
+  /* 深色蓝图背景 */
+  background-color: #0a0e1a;
+  
+  /* 多层网格叠加 */
+  background-image:
+    /* 主网格线 - 粗线 */
+    linear-gradient(rgba(30, 144, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 144, 255, 0.15) 1px, transparent 1px),
+    
+    /* 次网格线 - 细线 */
+    linear-gradient(rgba(30, 144, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 144, 255, 0.08) 1px, transparent 1px),
+    
+    /* 交叉点发光效果 */
+    radial-gradient(circle at 50% 50%, rgba(30, 144, 255, 0.1) 0%, transparent 70%);
+  
+  /* 主网格尺寸 - 100px */
+  background-size: 
+    100px 100px,
+    100px 100px,
+    20px 20px,
+    20px 20px,
+    200px 200px;
+  
+  background-position: 
+    -1px -1px,
+    -1px -1px,
+    -1px -1px,
+    -1px -1px,
+    center center;
+  
+  /* 动画效果 - 缓慢移动 */
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 
+      -1px -1px,
+      -1px -1px,
+      -1px -1px,
+      -1px -1px,
+      center center;
+  }
+  100% {
+    background-position: 
+      99px 99px,
+      99px 99px,
+      19px 19px,
+      19px 19px,
+      center center;
+  }
+}
+
+/* 全局文本渲染优化 */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

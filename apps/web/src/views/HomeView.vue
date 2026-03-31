@@ -198,8 +198,8 @@ Vue-Vite-Monorepo/
 /* Hero 区域 */
 .hero-section {
   padding: 6rem 3rem;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.1) 0%, rgba(0, 191, 255, 0.1) 100%);
+  border-bottom: 1px solid rgba(30, 144, 255, 0.2);
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -213,8 +213,8 @@ Vue-Vite-Monorepo/
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 50%, rgba(102, 126, 234, 0.2) 0%, transparent 50%),
-              radial-gradient(circle at 70% 50%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
+  background: radial-gradient(circle at 30% 50%, rgba(30, 144, 255, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(0, 191, 255, 0.15) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -230,11 +230,12 @@ Vue-Vite-Monorepo/
   font-size: 3.5rem;
   font-weight: 800;
   margin: 0 0 1.5rem 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 50%, #87CEEB 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.3;
+  text-shadow: 0 0 30px rgba(30, 144, 255, 0.3);
 }
 
 .title-icon {
@@ -283,25 +284,27 @@ Vue-Vite-Monorepo/
 }
 
 .action-button.primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%);
   color: white;
+  border: 1px solid rgba(30, 144, 255, 0.5);
 }
 
 .action-button.primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 25px rgba(30, 144, 255, 0.4), 0 0 20px rgba(30, 144, 255, 0.3);
 }
 
 .action-button.secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(30, 144, 255, 0.1);
+  color: #87CEEB;
+  border: 2px solid rgba(30, 144, 255, 0.3);
 }
 
 .action-button.secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(30, 144, 255, 0.2);
+  border-color: rgba(30, 144, 255, 0.5);
   transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(30, 144, 255, 0.2);
 }
 
 /* 内容区域 */
@@ -355,8 +358,8 @@ Vue-Vite-Monorepo/
 
 .stat-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(102, 126, 234, 0.5);
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  border-color: rgba(30, 144, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(30, 144, 255, 0.3), 0 0 20px rgba(30, 144, 255, 0.2);
 }
 
 .stat-icon {
@@ -367,7 +370,7 @@ Vue-Vite-Monorepo/
 .stat-value {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -402,8 +405,8 @@ Vue-Vite-Monorepo/
 
 .feature-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(102, 126, 234, 0.5);
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  border-color: rgba(30, 144, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(30, 144, 255, 0.3), 0 0 20px rgba(30, 144, 255, 0.2);
 }
 
 .feature-icon {
@@ -464,7 +467,7 @@ Vue-Vite-Monorepo/
 }
 
 .tech-version {
-  color: #667eea;
+  color: #1E90FF;
   font-size: 0.85rem;
 }
 
@@ -524,7 +527,7 @@ Vue-Vite-Monorepo/
 .step-number {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1E90FF 0%, #00BFFF 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -533,6 +536,7 @@ Vue-Vite-Monorepo/
   font-weight: 800;
   color: white;
   margin: 0 auto 1.5rem;
+  box-shadow: 0 0 20px rgba(30, 144, 255, 0.4);
 }
 
 .step-card h3 {
@@ -543,13 +547,13 @@ Vue-Vite-Monorepo/
 }
 
 .step-card code {
-  background: rgba(102, 126, 234, 0.2);
-  color: #f093fb;
+  background: rgba(30, 144, 255, 0.15);
+  color: #87CEEB;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-family: 'Courier New', monospace;
   font-size: 0.95rem;
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  border: 1px solid rgba(30, 144, 255, 0.3);
   display: inline-block;
 }
 
