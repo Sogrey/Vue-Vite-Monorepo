@@ -14,7 +14,7 @@ const throttleCount = ref(0)
 
 // 文档展示模式
 const docViewMode = ref<'iframe' | 'link'>('iframe')
-const docUrl = '/Vue-Vite-Monorepo/docs/sdk1-doc/index.html'
+const docUrl = `${import.meta.env.BASE_URL}docs/sdk1-doc/index.html`
 
 const handleDebounceInput = debounce((value: string) => {
   console.log('防抖执行:', value)

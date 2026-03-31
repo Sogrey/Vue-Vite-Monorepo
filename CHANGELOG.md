@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.1] - 2026-03-31
+
+### Changed
+- 🔄 路由模式从 `createWebHistory` 改为 `createWebHashHistory`
+  - URL 格式从 `/sdk1` 变为 `/#/sdk1`
+  - 支持 GitHub Pages 刷新和直接访问
+- 🔄 文档 URL 使用 `import.meta.env.BASE_URL` 动态获取
+  - 确保在不同环境下路径正确
+
+### Fixed
+- 🐛 修复 GitHub Pages 刷新页面 404 问题
+  - 使用 hash 路由模式解决 history 模式兼容性问题
+- 🐛 修复 SDK 文档在 GitHub Pages 上 404 的问题
+  - 确保文档正确复制到构建产物
+  - 使用动态路径配置
+- 🐛 修复构建产物中缺少文档文件的问题
+  - 优化构建流程，先生成文档再构建
+
+### Added
+- ✨ 新增 `build:github-pages` 专用构建脚本
+  - 自动完成文档生成、复制和构建
+- 📝 新增 GitHub Pages 部署说明文档
+  - 详细说明问题和解决方案
+  - 提供完整的部署指南
+
 ## [0.4.0] - 2026-03-31
 
 ### Added

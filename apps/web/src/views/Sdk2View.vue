@@ -15,7 +15,7 @@ const storageData = ref<any>(null)
 
 // 文档展示模式
 const docViewMode = ref<'iframe' | 'link'>('iframe')
-const docUrl = '/Vue-Vite-Monorepo/docs/sdk2-doc/index.html'
+const docUrl = `${import.meta.env.BASE_URL}docs/sdk2-doc/index.html`
 
 // API 方法列表
 const apiMethods = [

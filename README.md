@@ -6,6 +6,7 @@
 
 - **[快速开始指南](./docs/quick-start.md)** - 5 分钟快速上手
 - **[构建产物分发指南](./docs/build-distribution.md)** - 版本发布和产物分发 🆕
+- **[GitHub Pages 部署说明](./docs/github-pages-deployment.md)** - 部署到 GitHub Pages 指南 🆕
 - **[Vue + Vite 专属配置](./docs/vue-vite-config.md)** - 针对 Vue + Vite 的最佳实践配置 ⭐
 - **[SDK 文档生成计划](./docs/sdk-doc-generation-plan.md)** - JSDoc 文档集成说明 🆕
 - **[SDK 文档前端集成](./docs/sdk-doc-frontend-integration.md)** - 前端页面展示文档说明 🆕

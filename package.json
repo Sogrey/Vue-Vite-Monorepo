@@ -7,6 +7,7 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "build:distribute": "pnpm docs:all && node scripts/build-distribute.js",
+    "build:github-pages": "node scripts/build-for-github-pages.js",
     "docs:sdk1": "npx jsdoc --configure scripts/jsdoc/sdk1.conf.json --pedantic",
     "docs:sdk2": "npx jsdoc --configure scripts/jsdoc/sdk2.conf.json --pedantic",
     "docs:all": "pnpm docs:sdk1 && pnpm docs:sdk2 && pnpm docs:copy",
