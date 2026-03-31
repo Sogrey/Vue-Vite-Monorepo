@@ -15,7 +15,9 @@ const storageData = ref<any>(null)
 
 // 文档展示模式
 const docViewMode = ref<'iframe' | 'link'>('iframe')
-const docUrl = `${import.meta.env.BASE_URL}docs/sdk2-doc/index.html`
+// 使用绝对路径，避免 base 标签问题
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '')
+const docUrl = `${baseUrl}/docs/sdk2-doc/index.html`
 
 // API 方法列表
 const apiMethods = [

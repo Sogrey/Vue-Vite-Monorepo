@@ -14,7 +14,9 @@ const throttleCount = ref(0)
 
 // 文档展示模式
 const docViewMode = ref<'iframe' | 'link'>('iframe')
-const docUrl = `${import.meta.env.BASE_URL}docs/sdk1-doc/index.html`
+// 使用绝对路径，避免 base 标签问题
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '')
+const docUrl = `${baseUrl}/docs/sdk1-doc/index.html`
 
 const handleDebounceInput = debounce((value: string) => {
   console.log('防抖执行:', value)
