@@ -1,0 +1,51 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**",
+        "public/**",
+        "index.html",
+        "package.json",
+        "vite.config.ts",
+        "tsconfig.json",
+        "tsconfig.node.json",
+        "env.d.ts"
+      ],
+      "outputs": ["dist/**"]
+    },
+    "lint": {
+      "inputs": ["src/**/*.{vue,js,ts,jsx,tsx}"],
+      "outputs": []
+    },
+    "type-check": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*.{vue,ts,tsx}"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build", "lint"],
+      "outputs": []
+    },
+    "clean": {
+      "cache": false
+    }
+  },
+  "globalDependencies": [
+    "tsconfig.json",
+    "tsconfig.node.json",
+    ".eslintrc.js",
+    ".eslintignore",
+    ".prettierrc",
+    ".prettierignore",
+    "vite.config.ts"
+  ],
+  "globalEnv": ["NODE_ENV", "VITE_APP_TITLE", "VITE_API_BASEURL"],
+  "globalPassThroughEnv": []
+}
