@@ -41,8 +41,8 @@ jobs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
-    - name: Build for GitHub Pages
-      run: pnpm build:github-pages
+    - name: Build and organize artifacts
+      run: pnpm build:distribute
 
     # 整理构建产物到 build 目录（用于分发）
     - name: Organize build artifacts
