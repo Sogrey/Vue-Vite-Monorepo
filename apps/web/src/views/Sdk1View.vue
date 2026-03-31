@@ -16,6 +16,10 @@ const handleDebounceInput = debounce((value: string) => {
   console.log('防抖执行:', value)
 }, 1000)
 
+const onDebounceInput = (event: Event) => {
+  handleDebounceInput((event.target as HTMLInputElement).value)
+}
+
 const handleThrottleClick = throttle(() => {
   throttleCount.value++
   console.log('节流执行:', throttleCount.value)
@@ -141,7 +145,7 @@ const features = [
               <h3>⏱️ 防抖函数 (1秒延迟)</h3>
               <input
                 v-model="debounceInput"
-                @input="handleDebounceInput($event.target.value)"
+                @input="onDebounceInput"
                 placeholder="输入内容，1秒后执行"
                 class="demo-input"
               />
