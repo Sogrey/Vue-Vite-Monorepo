@@ -91,6 +91,22 @@ pnpm format
 
 主 Web 应用，使用 Vue 3 + Vite + TypeScript 构建。
 
+**特性：**
+- Vue 3 Composition API
+- Vue Router 路由管理
+- Pinia 状态管理
+- TypeScript 类型支持
+- Vite 快速构建
+- 🎨 现代化科技风格 UI
+- 🎨 响应式布局（桌面端左右布局 / 移动端传统布局）
+- 🎨 科幻蓝图网格背景
+
+**页面：**
+- Home - 项目综述页面
+- SDK1 - 工具函数库展示（含实时演示）
+- SDK2 - API 请求封装库展示（含实时演示）
+- About - 关于页面
+
 - 开发服务器：`pnpm dev --filter=web`
 - 构建：`turbo build --filter=web`
 

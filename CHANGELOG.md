@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2026-03-31
+
+### Added
+- 🎨 新增 SDK1 和 SDK2 专属页面
+  - SDK1 工具函数库展示页面（含实时演示）
+  - SDK2 API 请求封装库展示页面（含实时演示）
+- 🎨 前端 UI 现代化科技风格升级
+  - 桌面端左右布局（左侧导航 + 右侧内容区）
+  - 移动端传统上下布局（顶部导航栏）
+  - 半透明背景 + 蓝色边框光晕效果
+- 🎨 科幻蓝图网格背景
+  - CSS Grid 多层网格叠加
+  - 深色蓝图风格背景
+  - 蓝色主题色系
+
+### Changed
+- 🎨 重构 App.vue 布局系统
+  - 桌面端：固定左侧导航（260px）+ 右侧内容区铺满
+  - 移动端：顶部横向导航 + 内容区 100%
+  - 响应式断点：768px
+- 🎨 更新全局 CSS 变量系统
+  - 新增 variables.css 统一管理主题色
+  - 科幻蓝色主题色系
+
+### Fixed
+- 🐛 修复右侧内容区宽度问题
+  - 移除 max-width 限制
+  - 添加 overflow-x: hidden
+  - 添加 box-sizing: border-box
+- 🐛 修复网格背景高度问题
+  - 将背景从 #app 移到 body
+  - 使用 min-height: 100vh 确保铺满整个页面
+  - 添加 background-attachment: fixed 使网格固定
+- 🐛 移除网格移动动画，保持静态背景
+
+### Removed
+- 🧹 移除未使用的 counter.ts 文件
+
 ## [0.2.0] - 2026-03-31
 
 ### Changed
