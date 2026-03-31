@@ -245,6 +245,7 @@ Vue-Vite-Monorepo/
   animation: float 3s ease-in-out infinite;
   filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
   margin-right: 0.5rem;
+  -webkit-text-fill-color: initial;
 }
 
 @keyframes float {
