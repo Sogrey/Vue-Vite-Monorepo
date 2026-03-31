@@ -14,7 +14,17 @@ const buildDir = resolve(rootDir, 'build');
 
 console.log('📦 开始构建并整理产物...\n');
 
-// 1. 执行构建
+// 1. 生成文档
+console.log('📄 生成 SDK 文档...');
+try {
+  execSync('pnpm docs:all', { stdio: 'inherit', cwd: rootDir });
+  console.log('✅ 文档生成完成\n');
+} catch (error) {
+  console.error('❌ 文档生成失败');
+  process.exit(1);
+}
+
+// 2. 执行构建
 console.log('🔨 执行构建...');
 try {
   execSync('turbo build', { stdio: 'inherit', cwd: rootDir });
@@ -24,11 +34,19 @@ try {
   process.exit(1);
 }
 
-// 2. 创建 build 目录
+// 3. 创建 build 目录（保留文档目录）
 console.log('📁 创建 build 目录...');
 if (existsSync(buildDir)) {
-  console.log('  清理旧的 build 目录...');
-  rmSync(buildDir, { recursive: true, force: true });
+  console.log('  清理旧的 build 目录（保留文档）...');
+  // 只删除非文档目录
+  const items = readdirSync(buildDir);
+  items.forEach(item => {
+    const itemPath = resolve(buildDir, item);
+    const stat = statSync(itemPath);
+    if (stat.isDirectory() && !item.includes('-doc')) {
+      rmSync(itemPath, { recursive: true, force: true });
+    }
+  });
 }
 mkdirSync(buildDir, { recursive: true });
 console.log('✅ build 目录创建完成\n');
