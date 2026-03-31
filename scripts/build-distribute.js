@@ -19,7 +19,7 @@ console.log('📄 生成 SDK 文档...');
 try {
   execSync('pnpm docs:all', { stdio: 'inherit', cwd: rootDir });
   console.log('✅ 文档生成完成\n');
-} catch (error) {
+} catch {
   console.error('❌ 文档生成失败');
   process.exit(1);
 }
@@ -29,7 +29,7 @@ console.log('🔨 执行构建...');
 try {
   execSync('turbo build', { stdio: 'inherit', cwd: rootDir });
   console.log('✅ 构建完成\n');
-} catch (error) {
+} catch {
   console.error('❌ 构建失败');
   process.exit(1);
 }
