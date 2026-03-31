@@ -26,15 +26,28 @@ const router = createRouter({
     },
   ],
   // 路由切换时滚动到顶部
-  scrollBehavior() {
-    // 滚动主内容区域到顶部
-    const mainContent = document.querySelector('.main-content')
-    if (mainContent) {
-      mainContent.scrollTop = 0
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
     }
-    // 同时滚动窗口到顶部（兼容处理）
-    window.scrollTo(0, 0)
-    return { top: 0 }
+    // 使用 setTimeout 确保 DOM 已更新
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // 滚动 window 到顶部
+        window.scrollTo(0, 0)
+        // 滚动 .main-content 到顶部（如果有该元素）
+        const mainContent = document.querySelector('.main-content')
+        if (mainContent) {
+          mainContent.scrollTop = 0
+        }
+        // 滚动所有可能的滚动容器到顶部
+        const scrollableElements = document.querySelectorAll('[style*="overflow-y: auto"], [style*="overflow: auto"], .scroll-container')
+        scrollableElements.forEach(el => {
+          ;(el as HTMLElement).scrollTop = 0
+        })
+        resolve({ top: 0, left: 0 })
+      }, 100)
+    })
   },
 })
 
