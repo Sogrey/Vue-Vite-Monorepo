@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { HttpClient, storage } from '@vue-vite-monorepo/sdk2'
 
 // HTTP 客户端实例
@@ -103,9 +103,20 @@ const openDocInNewTab = () => {
   window.open(docUrl, '_blank')
 }
 
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+  const mainContent = document.querySelector('.main-content')
+  if (mainContent) {
+    (mainContent as HTMLElement).scrollTop = 0
+  }
+}
+
 onMounted(() => {
   testApi()
   testStorage()
+  nextTick(() => {
+    scrollToTop()
+  })
 })
 </script>
 
