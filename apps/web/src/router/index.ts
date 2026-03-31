@@ -30,23 +30,33 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition
     }
-    // 使用 setTimeout 确保 DOM 已更新
+    // 使用 setTimeout 确保 DOM 已更新，多次调用确保生效
     return new Promise((resolve) => {
+      // 立即滚动
+      window.scrollTo(0, 0)
+      const mainContent = document.querySelector('.main-content')
+      if (mainContent) {
+        mainContent.scrollTop = 0
+      }
+      
+      // 延迟再次滚动，确保覆盖其他滚动行为
       setTimeout(() => {
-        // 滚动 window 到顶部
         window.scrollTo(0, 0)
-        // 滚动 .main-content 到顶部（如果有该元素）
-        const mainContent = document.querySelector('.main-content')
-        if (mainContent) {
-          mainContent.scrollTop = 0
+        const mc = document.querySelector('.main-content')
+        if (mc) {
+          mc.scrollTop = 0
         }
-        // 滚动所有可能的滚动容器到顶部
-        const scrollableElements = document.querySelectorAll('[style*="overflow-y: auto"], [style*="overflow: auto"], .scroll-container')
-        scrollableElements.forEach(el => {
-          ;(el as HTMLElement).scrollTop = 0
-        })
         resolve({ top: 0, left: 0 })
       }, 100)
+      
+      // 最后一次确保
+      setTimeout(() => {
+        window.scrollTo(0, 0)
+        const mc = document.querySelector('.main-content')
+        if (mc) {
+          mc.scrollTop = 0
+        }
+      }, 300)
     })
   },
 })

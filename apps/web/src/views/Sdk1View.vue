@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, onActivated } from 'vue'
 import { formatDate, deepClone, debounce, throttle, generateId, isEmpty } from '@vue-vite-monorepo/sdk1'
 
 // 示例数据
@@ -35,12 +35,32 @@ const openDocInNewTab = () => {
   window.open(docUrl, '_blank')
 }
 
+// 强制滚动到顶部（使用多次调用确保生效）
 const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  // 立即滚动
+  window.scrollTo(0, 0)
   const mainContent = document.querySelector('.main-content')
   if (mainContent) {
     (mainContent as HTMLElement).scrollTop = 0
   }
+  
+  // 使用 requestAnimationFrame 确保滚动生效
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0)
+    const mc = document.querySelector('.main-content')
+    if (mc) {
+      (mc as HTMLElement).scrollTop = 0
+    }
+  })
+  
+  // 再次确保
+  setTimeout(() => {
+    window.scrollTo(0, 0)
+    const mc = document.querySelector('.main-content')
+    if (mc) {
+      (mc as HTMLElement).scrollTop = 0
+    }
+  }, 50)
 }
 
 onMounted(() => {
@@ -48,6 +68,11 @@ onMounted(() => {
   nextTick(() => {
     scrollToTop()
   })
+})
+
+// 组件激活时也滚动到顶部
+onActivated(() => {
+  scrollToTop()
 })
 
 const features = [
