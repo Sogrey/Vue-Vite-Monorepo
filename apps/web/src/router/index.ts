@@ -25,6 +25,17 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
   ],
+  // 路由切换时滚动到顶部
+  scrollBehavior() {
+    // 滚动主内容区域到顶部
+    const mainContent = document.querySelector('.main-content')
+    if (mainContent) {
+      mainContent.scrollTop = 0
+    }
+    // 同时滚动窗口到顶部（兼容处理）
+    window.scrollTo(0, 0)
+    return { top: 0 }
+  },
 })
 
 export default router
