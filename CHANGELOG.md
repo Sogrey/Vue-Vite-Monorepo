@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2026-03-31
+
+### Added
+- 📄 SDK 文档生成系统集成
+  - 为 SDK1 和 SDK2 集成 JSDoc 文档生成功能
+  - 支持从 TypeScript 源码生成 API 文档
+  - 使用 jsdoc-babel 插件解析 TypeScript
+  - 文档输出到 `build/sdk1-doc/` 和 `build/sdk2-doc/`
+  - 添加 npm 脚本: `docs:sdk1`, `docs:sdk2`, `docs:all`
+
+### Technical Details
+- 安装依赖: `jsdoc`, `jsdoc-babel`, `@babel/core`, `@babel/preset-env`, `@babel/preset-typescript`, `taffydb`
+- 创建 JSDoc 配置文件: `scripts/jsdoc/sdk1.conf.json`, `scripts/jsdoc/sdk2.conf.json`
+- 从参考项目拷贝并配置文档模板: `scripts/jsdoc/jsdoc_template/`
+- 为 SDK1 和 SDK2 源码添加完整的 JSDoc 注释
+- 解决 TypeScript 类型解析问题,简化复杂类型表达式
+
+### Documentation
+- 📝 创建 SDK 文档生成计划文档 (`docs/sdk-doc-generation-plan.md`)
+- 📝 更新 README.md,添加 SDK 文档生成说明
+- 📝 增强 packages/sdk1/src/index.ts 的 JSDoc 注释
+- 📝 增强 packages/sdk2/src/index.ts 的 JSDoc 注释
+
 ## [0.3.0] - 2026-03-31
 
 ### Added

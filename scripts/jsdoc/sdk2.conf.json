@@ -1,0 +1,30 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["packages/sdk2/src"],
+    "exclude": [],
+    "includePattern": ".+\\.(js|ts)(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": [
+    "node_modules/jsdoc-babel"
+  ],
+  "babel": {
+    "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+    "extensions": ["js", "ts"]
+  },
+  "templates": {
+    "cleverLinks": true,
+    "default": {
+      "outputSourceFiles": false
+    }
+  },
+  "opts": {
+    "destination": "build/sdk2-doc",
+    "template": "./scripts/jsdoc/jsdoc_template",
+    "recurse": true
+  }
+}
+

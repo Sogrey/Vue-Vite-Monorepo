@@ -54,6 +54,25 @@ packages.forEach(pkg => {
   }
 });
 
+// 4. 复制 SDK 文档
+console.log('\n📄 复制 SDK 文档...');
+const docs = [
+  { name: 'sdk1-doc', source: 'build/sdk1-doc' },
+  { name: 'sdk2-doc', source: 'build/sdk2-doc' }
+];
+
+docs.forEach(doc => {
+  const sourcePath = resolve(rootDir, doc.source);
+  const targetPath = resolve(buildDir, 'web', 'docs', doc.name);
+
+  if (existsSync(sourcePath)) {
+    console.log(`  ✅ 复制 ${doc.name}: ${doc.source} -> build/web/docs/${doc.name}`);
+    cpSync(sourcePath, targetPath, { recursive: true });
+  } else {
+    console.log(`  ⚠️  跳过 ${doc.name}: 文档不存在 (${doc.source})，请先运行 pnpm docs:all`);
+  }
+});
+
 console.log('\n📊 构建产物结构:');
 function printTree(dir, prefix = '', maxDepth = 2, currentDepth = 0) {
   if (currentDepth >= maxDepth) return;

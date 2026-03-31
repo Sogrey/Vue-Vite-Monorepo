@@ -7,6 +7,8 @@
 - **[快速开始指南](./docs/quick-start.md)** - 5 分钟快速上手
 - **[构建产物分发指南](./docs/build-distribution.md)** - 版本发布和产物分发 🆕
 - **[Vue + Vite 专属配置](./docs/vue-vite-config.md)** - 针对 Vue + Vite 的最佳实践配置 ⭐
+- **[SDK 文档生成计划](./docs/sdk-doc-generation-plan.md)** - JSDoc 文档集成说明 🆕
+- **[SDK 文档前端集成](./docs/sdk-doc-frontend-integration.md)** - 前端页面展示文档说明 🆕
 - **[项目结构说明](./docs/project-structure.md)** - 详细的目录结构和配置说明
 - **[Turborepo 完全指南](./docs/turborepo-guide.md)** - Turborepo 深度解析
 - **[配置优化记录](./docs/config-optimization.md)** - 配置优化详情
@@ -83,6 +85,9 @@ pnpm clean
 
 # 格式化代码
 pnpm format
+
+# 生成 SDK 文档
+pnpm docs:all
 ```
 
 ## 包说明
@@ -128,6 +133,31 @@ API 请求封装库，提供：
 - `HttpClient` - HTTP 客户端类
 - `createHttpClient` - 创建 HTTP 客户端
 - `storage` - 本地存储工具
+
+### 📄 SDK 文档
+
+本项目为 SDK1 和 SDK2 集成了 JSDoc 文档生成功能：
+
+**生成文档：**
+```bash
+# 生成 SDK1 文档
+pnpm docs:sdk1
+
+# 生成 SDK2 文档
+pnpm docs:sdk2
+
+# 生成所有 SDK 文档
+pnpm docs:all
+```
+
+**文档输出位置：**
+- SDK1 文档：`build/sdk1-doc/`
+- SDK2 文档：`build/sdk2-doc/`
+
+**查看文档：**
+打开 `build/sdk1-doc/index.html` 或 `build/sdk2-doc/index.html` 即可查看完整的 API 文档。
+
+详细配置说明请参考：[SDK 文档生成计划](./docs/sdk-doc-generation-plan.md)
 
 ## Monorepo 优势
 

@@ -13,6 +13,10 @@ const apiData = ref<any>(null)
 const loading = ref(false)
 const storageData = ref<any>(null)
 
+// 文档展示模式
+const docViewMode = ref<'iframe' | 'link'>('iframe')
+const docUrl = '/Vue-Vite-Monorepo/docs/sdk2-doc/index.html'
+
 // API 方法列表
 const apiMethods = [
   {
@@ -91,6 +95,10 @@ const testStorage = () => {
   }
   storage.set('sdk2-test', testData)
   storageData.value = storage.get('sdk2-test')
+}
+
+const openDocInNewTab = () => {
+  window.open(docUrl, '_blank')
 }
 
 onMounted(() => {
@@ -223,17 +231,54 @@ onMounted(() => {
         </div>
       </section>
 
-      <!-- 文档提示 -->
+      <!-- 文档展示 -->
       <section class="content-card">
         <div class="card-header">
           <span class="header-icon">📖</span>
           <h2>API 文档</h2>
+          <div class="doc-actions">
+            <button 
+              @click="docViewMode = 'iframe'" 
+              :class="['mode-btn', { active: docViewMode === 'iframe' }]"
+            >
+              内嵌显示
+            </button>
+            <button 
+              @click="docViewMode = 'link'" 
+              :class="['mode-btn', { active: docViewMode === 'link' }]"
+            >
+              链接卡片
+            </button>
+            <button @click="openDocInNewTab" class="open-btn">
+              🔗 新窗口打开
+            </button>
+          </div>
         </div>
         <div class="card-body">
-          <div class="placeholder-doc">
-            <span class="placeholder-icon">📚</span>
-            <p>文档正在编写中...</p>
-            <p class="hint">请稍后访问查看完整的 API 文档</p>
+          <!-- iframe 模式 -->
+          <div v-if="docViewMode === 'iframe'" class="doc-iframe-wrapper">
+            <iframe 
+              :src="docUrl" 
+              class="doc-iframe"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+          
+          <!-- 链接卡片模式 -->
+          <div v-else class="doc-link-wrapper">
+            <div class="doc-link-card" @click="openDocInNewTab">
+              <div class="doc-link-icon">📚</div>
+              <div class="doc-link-content">
+                <h3>SDK2 API 文档</h3>
+                <p>查看完整的 API 请求封装库文档</p>
+                <div class="doc-link-url">{{ docUrl }}</div>
+              </div>
+              <div class="doc-link-arrow">→</div>
+            </div>
+            <div class="doc-tips">
+              <p>💡 提示：点击上方卡片可在新窗口中查看完整的 API 文档</p>
+            </div>
           </div>
         </div>
       </section>
@@ -556,27 +601,145 @@ pre {
   color: #f093fb;
 }
 
-/* 文档占位 */
-.placeholder-doc {
-  text-align: center;
-  padding: 3rem;
+/* 文档展示 */
+.doc-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mode-btn {
+  background: rgba(102, 126, 234, 0.1);
   color: #a0aec0;
-}
-
-.placeholder-icon {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: 1rem;
-  opacity: 0.5;
-}
-
-.placeholder-doc p {
-  margin: 0.5rem 0;
-}
-
-.hint {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   font-size: 0.85rem;
-  font-style: italic;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  color: white;
+}
+
+.mode-btn.active {
+  background: rgba(102, 126, 234, 0.3);
+  color: #667eea;
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.open-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.open-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.doc-iframe-wrapper {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.doc-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.doc-link-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.doc-link-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.doc-link-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(102, 126, 234, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+}
+
+.doc-link-icon {
+  font-size: 3rem;
+  opacity: 0.8;
+}
+
+.doc-link-content {
+  flex: 1;
+}
+
+.doc-link-content h3 {
+  color: #667eea;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.doc-link-content p {
+  color: #a0aec0;
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.doc-link-url {
+  color: #f093fb;
+  font-size: 0.85rem;
+  font-family: 'Courier New', monospace;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.doc-link-arrow {
+  font-size: 2rem;
+  color: #667eea;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.doc-link-card:hover .doc-link-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.doc-tips {
+  text-align: center;
+  padding: 1rem;
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+.doc-tips p {
+  margin: 0;
 }
 
 /* 响应式 */
@@ -608,6 +771,19 @@ pre {
 
   .config-type {
     text-align: left;
+  }
+
+  .doc-actions {
+    flex-wrap: wrap;
+  }
+
+  .doc-iframe-wrapper {
+    height: 600px;
+  }
+
+  .doc-link-card {
+    flex-direction: column;
+    text-align: center;
   }
 }
 </style>

@@ -147,6 +147,7 @@ pnpm lint         # 代码检查
 pnpm type-check   # 类型检查
 pnpm clean        # 清理构建产物
 pnpm format       # 格式化代码
+pnpm docs:all     # 生成 SDK 文档
 ```
 
 ## 🔧 技术栈
@@ -198,6 +199,27 @@ API 请求封装库，提供 HTTP 客户端和存储工具。
 - 本地存储工具
 - 完整的 TypeScript 类型
 
+### 📄 SDK 文档生成
+本项目集成了 JSDoc 文档生成系统：
+
+**特性：**
+- 从 TypeScript 源码自动生成 API 文档
+- 使用 jsdoc-babel 插件解析 TypeScript
+- 现代化文档模板
+- 支持搜索功能
+
+**生成命令：**
+- `pnpm docs:sdk1` - 生成 SDK1 文档
+- `pnpm docs:sdk2` - 生成 SDK2 文档
+- `pnpm docs:all` - 生成所有 SDK 文档
+
+**文档位置：**
+- SDK1 文档：`build/sdk1-doc/`
+- SDK2 文档：`build/sdk2-doc/`
+
+**详细说明：**
+请参考 [SDK 文档生成计划](./sdk-doc-generation-plan.md)
+
 ## 🚀 下一步建议
 
 ### 1. 添加更多应用
@@ -243,5 +265,6 @@ npx turbo link
 4. **文档完善** - 从快速开始到深度解析，文档齐全
 5. **易于扩展** - 可轻松添加新的应用和包
 6. **UI 现代化** - 科技风格界面、响应式布局、蓝图网格背景
+7. **文档自动化** - JSDoc 自动生成 API 文档，保持文档与代码同步
 
 项目已准备就绪，可以开始实际开发工作！🎉
