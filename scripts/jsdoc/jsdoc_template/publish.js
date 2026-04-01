@@ -3,6 +3,13 @@
 "use strict";
 
 var fs = require("jsdoc/fs");
+var nativeFs = require("fs");
+var helper = require("jsdoc/util/templateHelper");
+var path = require("jsdoc/path");
+var taffy = require("taffydb").taffy;
+var template = require("jsdoc/template");
+
+var htmlsafe = helper.htmlsafe;
 var helper = require("jsdoc/util/templateHelper");
 var path = require("jsdoc/path");
 var taffy = require("taffydb").taffy;
@@ -12,6 +19,14 @@ var htmlsafe = helper.htmlsafe;
 var linkto = helper.linkto;
 var resolveAuthorLinks = helper.resolveAuthorLinks;
 var hasOwnProp = Object.prototype.hasOwnProperty;
+
+// DEBUG 日志函数
+function debugLog(message) {
+  // 可根据需要开启/关闭调试日志
+  if (process.env.JSDOC_DEBUG === 'true') {
+    console.log(message);
+  }
+}
 
 var data;
 var view;
@@ -256,10 +271,15 @@ exports.publish = function (taffyData, opts, tutorials) {
   var templatePath = opts.template;
   view = new template.Template(templatePath + "/tmpl");
 
+  debugLog('[DEBUG] templatePath: ' + templatePath);
+  debugLog('[DEBUG] opts.logo: ' + opts.logo);
+
   // 获取自定义 logo 配置
   var customLogoPath = opts.logo;
   var defaultLogoPath = path.join(templatePath, "static", "images", "logo.png");
-  var targetLogoPath = path.join(outdir, "images", "logo.png");
+
+  debugLog('[DEBUG] customLogoPath: ' + customLogoPath);
+  debugLog('[DEBUG] outdir (初始): ' + outdir);
 
   // claim some special filenames in advance, so the All-Powerful Overseer of Filename Uniqueness
   // doesn't try to hand them out later
@@ -333,6 +353,10 @@ exports.publish = function (taffyData, opts, tutorials) {
   }
   fs.mkPath(outdir);
 
+  // 定义 logo 目标路径（在 outdir 更新后）
+  var targetLogoPath = path.join(outdir, "images", "logo.png");
+  debugLog('[DEBUG] targetLogoPath: ' + targetLogoPath);
+
   // copy the template's static files to outdir
   var fromDir = path.join(templatePath, "static");
   var staticFiles = fs.ls(fromDir, 3);
@@ -346,18 +370,26 @@ exports.publish = function (taffyData, opts, tutorials) {
   // 处理自定义 logo
   if (customLogoPath) {
     // 解析自定义 logo 路径（相对于当前工作目录）
-    var cwd = process.cwd();
-    var resolvedLogoPath = path.resolve(cwd, customLogoPath);
+    var resolvedLogoPath = path.resolve(process.cwd(), customLogoPath);
     
-    // 检查文件是否存在
-    try {
-      fs.copyFileSync(resolvedLogoPath, targetLogoPath);
-      console.log("✓ 自定义 logo 已应用:", customLogoPath);
-    } catch (e) {
-      console.warn("⚠ 自定义 logo 文件不存在或无法复制:", customLogoPath, "- 使用默认 logo");
+    // 检查文件是否存在，然后复制
+    if (nativeFs.existsSync(resolvedLogoPath)) {
+      try {
+        // 确保 images 目录存在
+        var imageDir = path.join(outdir, 'images');
+        if (!fs.existsSync(imageDir)) {
+          fs.mkPath(imageDir);
+        }
+        
+        // 使用原生 fs 复制文件到目标位置
+        nativeFs.copyFileSync(resolvedLogoPath, targetLogoPath);
+        console.log('✅ 已应用自定义 logo: ' + customLogoPath);
+      } catch (e) {
+        console.warn('⚠️  自定义 logo 复制错误: ' + e.message);
+      }
+    } else {
+      console.warn('⚠️  自定义 logo 文件不存在: ' + resolvedLogoPath + '，将使用默认 logo');
     }
-  } else {
-    console.log("✓ 使用默认 logo");
   }
 
   if (sourceFilePaths.length) {
