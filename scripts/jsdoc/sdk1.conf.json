@@ -24,7 +24,8 @@
   "opts": {
     "destination": "build/sdk1-doc",
     "template": "./scripts/jsdoc/jsdoc_template",
-    "recurse": true
+    "recurse": true,
+    "logo": "packages/sdk1/logo.png"
   }
 }
 

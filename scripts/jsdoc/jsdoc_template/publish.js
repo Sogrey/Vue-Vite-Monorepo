@@ -256,6 +256,11 @@ exports.publish = function (taffyData, opts, tutorials) {
   var templatePath = opts.template;
   view = new template.Template(templatePath + "/tmpl");
 
+  // 获取自定义 logo 配置
+  var customLogoPath = opts.logo;
+  var defaultLogoPath = path.join(templatePath, "static", "images", "logo.png");
+  var targetLogoPath = path.join(outdir, "images", "logo.png");
+
   // claim some special filenames in advance, so the All-Powerful Overseer of Filename Uniqueness
   // doesn't try to hand them out later
   var indexUrl = helper.getUniqueFilename("index");
@@ -337,6 +342,23 @@ exports.publish = function (taffyData, opts, tutorials) {
     fs.mkPath(toDir);
     fs.copyFileSync(fileName, toDir);
   });
+
+  // 处理自定义 logo
+  if (customLogoPath) {
+    // 解析自定义 logo 路径（相对于当前工作目录）
+    var cwd = process.cwd();
+    var resolvedLogoPath = path.resolve(cwd, customLogoPath);
+    
+    // 检查文件是否存在
+    try {
+      fs.copyFileSync(resolvedLogoPath, targetLogoPath);
+      console.log("✓ 自定义 logo 已应用:", customLogoPath);
+    } catch (e) {
+      console.warn("⚠ 自定义 logo 文件不存在或无法复制:", customLogoPath, "- 使用默认 logo");
+    }
+  } else {
+    console.log("✓ 使用默认 logo");
+  }
 
   if (sourceFilePaths.length) {
     sourceFiles = shortenPaths(sourceFiles, path.commonPrefix(sourceFilePaths));
