@@ -311,7 +311,9 @@ html, body {
   .main-content {
     margin-left: 0;
     width: 100%;
+    max-width: 100vw; /* 覆盖桌面端的宽度限制 */
     margin-top: 120px; /* 为顶部导航留出空间 */
+    padding: 0; /* 移除可能的 padding，让子组件自己控制 */
   }
 }
 
