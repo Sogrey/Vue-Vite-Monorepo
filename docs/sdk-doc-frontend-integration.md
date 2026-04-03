@@ -7,13 +7,16 @@
 ## 🎯 实现功能
 
 ### 1. 双模式展示
+
 - **iframe 内嵌显示**：直接在页面内嵌入完整的 API 文档
 - **链接卡片模式**：以卡片形式展示，点击后在新窗口打开
 
 ### 2. 新窗口打开
+
 - 提供"新窗口打开"按钮，可在新标签页中查看完整文档
 
 ### 3. 响应式设计
+
 - 桌面端和移动端自适应布局
 - 移动端优化显示效果
 
@@ -41,23 +44,26 @@ scripts/
 ### 开发环境
 
 1. **生成文档**（如果还没有生成）：
+
    ```bash
    pnpm docs:all
    ```
 
 2. **复制文档到 public 目录**：
+
    ```bash
    pnpm docs:copy
    ```
 
 3. **启动开发服务器**：
+
    ```bash
    pnpm dev --filter=web
    ```
 
 4. **访问页面**：
-   - SDK1: http://localhost:5173/Vue-Vite-Monorepo/sdk1
-   - SDK2: http://localhost:5173/Vue-Vite-Monorepo/sdk2
+   - SDK1: http://localhost:5173/Vue-Vite-Monorepo#/sdk1
+   - SDK2: http://localhost:5173/Vue-Vite-Monorepo#/sdk2
 
 ### 生产构建
 
@@ -68,6 +74,7 @@ pnpm build:distribute
 ```
 
 此命令会：
+
 1. 生成 SDK 文档
 2. 构建所有包
 3. 整理构建产物
@@ -84,11 +91,13 @@ pnpm build:distribute
 3. **新窗口打开**：在新标签页打开文档
 
 ### iframe 模式
+
 - 直接在页面内嵌入完整的 JSDoc 文档
 - 高度 800px（移动端 600px）
 - 白色背景，圆角边框
 
 ### 链接卡片模式
+
 - 以卡片形式展示文档链接
 - 包含图标、标题、描述和 URL
 - 悬停效果和点击动画
